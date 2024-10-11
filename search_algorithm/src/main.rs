@@ -23,5 +23,5 @@ fn main() {
         });
     }).unwrap();
 
-    println!("{:?}", benchmark_result);
+    println!("{:?}", benchmark_result.elapsed();
 }
