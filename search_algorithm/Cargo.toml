@@ -4,3 +4,5 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+benchmarking = "0.4.13"
+const-random = "0.1.18"

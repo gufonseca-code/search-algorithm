@@ -1,4 +1,6 @@
-fn max_number(numbers: &[i64]) -> Option<i64> {
+use const_random::const_random;
+
+fn max_number(numbers: &[u64]) -> Option<u64> {
     let mut large = numbers.first()?;
 
     for number in numbers {
@@ -11,8 +13,15 @@ fn max_number(numbers: &[i64]) -> Option<i64> {
 }
 
 fn main() {
-    let numbers: [i64; 10] = [5, 3, 7, 8, 6, 1, 2, 9, 10, 4];
-    let biggest = max_number(&numbers).unwrap();
+    static NUMBERS: [u64; 1_000_000] = [const_random!(u64); 1_000_000];
+        
+    benchmarking::warm_up();
 
-    println!("Biggest number: {}", biggest);
+    let benchmark_result = benchmarking::measure_function(|measurer| {
+        measurer.measure(|| {
+            max_number(&NUMBERS);
+        });
+    }).unwrap();
+
+    println!("{:?}", benchmark_result);
 }
